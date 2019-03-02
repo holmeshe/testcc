@@ -25,8 +25,7 @@ static void problemLoading(const char* filename) {
 
 // on "init" you need to initialize your instance
 bool Game::init() {
-    //////////////////////////////
-    // 1. super init first
+    // 5. ref: https://docs.cocos2d-x.org/cocos2d-x/en/physics/concepts.html
     if ( !Scene::initWithPhysics() ) {
         return false;
     }
@@ -52,6 +51,7 @@ bool Game::init() {
     _bird->setPosition(Vec2(origin.x + _bird->getContentSize().width * 3,
                             origin.y + visibleSize.height / 2 + _bird->getContentSize().height / 2));
     
+    // 5. ref: https://docs.cocos2d-x.org/cocos2d-x/en/physics/collisions.html
     auto physicsBody = PhysicsBody::createCircle(_bird->getContentSize().width/3.8 );
     physicsBody->setDynamic(true);
     physicsBody->setCategoryBitmask((int)PhysicsCategory::Bird);
@@ -74,6 +74,7 @@ bool Game::init() {
     // 3. ref: https://www.gamefromscratch.com/post/2014/10/11/Cocos2d-x-Tutorial-Series-Game-loops-Updates-and-Action-Handling.aspx
     this->scheduleUpdate();
     
+    // 5. ref: https://docs.cocos2d-x.org/cocos2d-x/en/physics/collisions.html
     auto contactListener = EventListenerPhysicsContact::create();
     contactListener->onContactBegin = CC_CALLBACK_1(Game::onContactBegin, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(contactListener, this);
